@@ -1,103 +1,105 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
-import styles from "../styles/Home.module.css";
-import Image from "next/image";
-import { NextPage } from "next";
+import { ConnectWallet, MediaRenderer, useAddress, useContract, useContractRead, useOwnedNFTs } from "@thirdweb-dev/react";
+import type { NextPage } from "next";
+import { FARMER_ADDRESS, REWARDS_ADDRESS, STAKING_ADDRESS, TOOLS_ADDRESS } from "../const/addresses";
+import { ClaimFarmer } from "../components/ClaimFarmer";
+import { Inventory } from "../components/Inventory";
+import { Equipped } from "../components/Equipped";
+import { BigNumber, ethers } from "ethers";
+import { Text, Box, Card, Container, Flex, Heading, SimpleGrid, Spinner, Skeleton } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
+  const address = useAddress();
+
+  const { contract: farmercontract } = useContract(FARMER_ADDRESS);
+  const { contract: toolsContract } = useContract(TOOLS_ADDRESS);
+  const { contract: stakingContract } = useContract(STAKING_ADDRESS);
+  const { contract: rewardContract } = useContract(REWARDS_ADDRESS);
+
+  const { data: ownedFarmers, isLoading: loadingOwnedFarmers } = useOwnedNFTs(farmercontract, address);
+  const { data: ownedTools, isLoading: loadingOwnedTools } = useOwnedNFTs(toolsContract, address);
+
+  const { data: equippedTools } = useContractRead(
+    stakingContract,
+    "getStakeInfo",
+    [address]
+  );
+
+  const { data: rewardBalance } = useContractRead(rewardContract, "balanceOf", [address]);
+
+  if (!address) {
+    return (
+      <Flex direction="column" minHeight="100vh" justifyContent="center" alignItems="center" bg="gray.200">
+        <Heading my={8}>Start # HASH</Heading>
+        <ConnectWallet />
+      </Flex>
+    );
+  }
+
+  if (loadingOwnedFarmers) {
+    return (
+      <Flex minHeight="100vh" justifyContent="center" alignItems="center" bg="gray.200">
+        <Spinner />
+      </Flex>
+    );
+  }
+
+  if (ownedFarmers?.length === 0) {
+    return (
+      <Flex minHeight="100vh" justifyContent="center" alignItems="center" bg="gray.200">
+        <ClaimFarmer />
+      </Flex>
+    );
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>
-            Welcome to{" "}
-            <span className={styles.gradientText0}>
-              <a
-                href="https://thirdweb.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                thirdweb.
-              </a>
-            </span>
-          </h1>
-
-          <p className={styles.description}>
-            Get started by configuring your desired network in{" "}
-            <code className={styles.code}>src/index.js</code>, then modify the{" "}
-            <code className={styles.code}>src/App.js</code> file!
-          </p>
-
-          <div className={styles.connect}>
-            <ConnectWallet />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://portal.thirdweb.com/"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/portal-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText1}>Portal ➜</h2>
-              <p>
-                Guides, references, and resources that will help you build with
-                thirdweb.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/dashboard"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/dashboard-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText2}>Dashboard ➜</h2>
-              <p>
-                Deploy, configure, and manage your smart contracts from the
-                dashboard.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/templates"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/templates-preview.png"
-              alt="Placeholder preview of templates"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText3}>Templates ➜</h2>
-              <p>
-                Discover and clone template projects showcasing thirdweb
-                features.
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </main>
+    <Flex direction="column" bg="gray.200" color="white">
+      <Container maxW="100%" py={8}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+          <Card p={5}>
+            <Heading>Miner:</Heading>
+            <SimpleGrid columns={2} spacing={10}>
+              <Box>
+                {ownedFarmers?.map((nft) => (
+                  <div key={nft.metadata.id}>
+                    <MediaRenderer
+                      src={nft.metadata.image}
+                      height="100%"
+                      width="100%"
+                    />
+                  </div>
+                ))}
+              </Box>
+              <Box>
+                <Text fontSize="small" fontWeight="bold">$ELT Balance:</Text>
+                {rewardBalance && (
+                  <p>{ethers.utils.formatUnits(rewardBalance, 18)}</p>
+                )}
+              </Box>
+            </SimpleGrid>
+          </Card>
+          <Card p={5}>
+            <Heading>Inventory:</Heading>
+            <Skeleton isLoaded={!loadingOwnedTools}>
+              <Inventory
+                nft={ownedTools}
+              />
+            </Skeleton>
+          </Card>
+        </SimpleGrid>
+        <Card p={5} my={10}>
+          <Heading mb={8}>Equiped Device:</Heading>
+          <SimpleGrid columns={3} spacing={10}>
+            {equippedTools &&
+              equippedTools[0].map((nft: BigNumber) => (
+                <Equipped
+                  key={nft.toNumber()}
+                  tokenId={nft.toNumber()}
+                />
+              ))}
+          </SimpleGrid>
+        </Card>
+      </Container>
+    </Flex>
   );
 };
 
