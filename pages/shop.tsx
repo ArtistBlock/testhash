@@ -1,33 +1,33 @@
 import { useContract, useNFTs } from "@thirdweb-dev/react";
 import { TOOLS_ADDRESS } from "../const/addresses";
 import Link from "next/link";
-import { Text, Button, Container, Flex, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Text, Button, Container, Flex, Heading, SimpleGrid, Spinner, Box } from "@chakra-ui/react";
 import NFT from "../components/NFT";
 
-export default function Shop()  {
+export default function Shop() {
     const { contract } = useContract(TOOLS_ADDRESS);
-    const { data: nfts } = useNFTs(contract);
+    const { data: nfts, isLoading, isError } = useNFTs(contract);
     console.log(nfts);
 
     return (
         <Container maxW={"1200px"}>
             <Flex direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                <Link
-                    href="/"
-                >
+                <Link href="/">
                     <Button>Back</Button>
                 </Link>
             </Flex>
             <Heading mt={"40px"}>Shop</Heading>
             <Text>Purchase tools with $Electron (ELT) to increase your earnings.</Text>
-            {!nfts ? (
+            {isLoading ? (
                 <Flex h={"50vh"} justifyContent={"center"} alignItems={"center"}>
                     <Spinner />
                 </Flex>
+            ) : isError ? (
+                <Box>Error loading products. Please try again later.</Box>
             ) : (
                 <SimpleGrid columns={3} spacing={10}>
                     {nfts?.map((nftItem) => (
-                        <NFT 
+                        <NFT
                             key={nftItem.metadata.id}
                             nft={nftItem}
                         />
@@ -35,5 +35,5 @@ export default function Shop()  {
                 </SimpleGrid>
             )}
         </Container>
-    )
-};
+    );
+}
