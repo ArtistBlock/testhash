@@ -72,7 +72,7 @@ const Home: NextPage = () => {
               <Box>
                 <Text fontSize="small" fontWeight="bold">$ELT Balance:</Text>
                 {rewardBalance && (
-                  <p>{ethers.utils.formatUnits(rewardBalance, 18)}</p>
+                  <p>{parseFloat(ethers.utils.formatUnits(rewardBalance, 18)).toFixed(2)}</p>
                 )}
               </Box>
             </SimpleGrid>

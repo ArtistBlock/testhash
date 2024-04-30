@@ -16,18 +16,17 @@ const Footer: React.FC = () => {
                 <p>@LookHook DEV </p>
             </div>
             <div>
-                {/* Ссылки на социальные сети */}
                 <Flex justifyContent="center" alignItems="center">
-                    <Link href={"https://twitter.com/LookHookInfo"} mx={2}>
+                    <Link href={"https://twitter.com/LookHookInfo"} mx={2} target="_blank" rel="noopener noreferrer">
                         <FaTwitter size={24} color="#ffffff" />
                     </Link>
-                    <Link href={"https://discord.gg/U8fSgmjWDB"} mx={2}>
+                    <Link href={"https://discord.gg/U8fSgmjWDB"} mx={2} target="_blank" rel="noopener noreferrer">
                         <FaDiscord size={24} color="#ffffff" />
                     </Link>
-                    <Link href={"https://t.me/ChainInside/491"} mx={2}>
+                    <Link href={"https://t.me/ChainInside/491"} mx={2} target="_blank" rel="noopener noreferrer">
                         <FaTelegram size={24} color="#ffffff" />
                     </Link>
-                    <Link href={"https://github.com/LookHookInfo"} mx={2}>
+                    <Link href={"https://github.com/LookHookInfo"} mx={2} target="_blank" rel="noopener noreferrer">
                         <FaGithub size={24} color="#ffffff" />
                     </Link>
                 </Flex>
