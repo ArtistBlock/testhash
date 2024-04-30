@@ -9,6 +9,7 @@ export default function NavBar() {
                 <Flex alignItems={"center"}>
                     <Link href={"/"} mx={2}>Play</Link>
                     <Link href={"/shop"} mx={2}>Shop</Link>
+                    <Link href={"/info"} mx={2}>Info</Link>
                 </Flex>
                 <ConnectWallet />
             </Flex>
