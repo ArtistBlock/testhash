@@ -72,7 +72,7 @@ const Home: NextPage = () => {
               <Box>
                 <Text fontSize="small" fontWeight="bold">$ELT Balance:</Text>
                 {rewardBalance && (
-                  <p>{parseFloat(ethers.utils.formatUnits(rewardBalance, 18)).toFixed(2)}</p>
+                  <p>{(Math.round(parseFloat(ethers.utils.formatUnits(rewardBalance, 18)) * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 )}
               </Box>
             </SimpleGrid>
