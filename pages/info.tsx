@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Container, Heading, Text, Divider, Box, Icon } from "@chakra-ui/react";
 import { MdCheckCircle } from "react-icons/md";
 
@@ -63,6 +64,12 @@ export default function Info() {
                     <Text>- Acquiring NFT GPU and staking, mining speed # 0.042 per hour \ 100 GPU per account available / price $1 each.</Text>
                     <Text>- Acquiring NFT Asic and staking, mining speed # 0.42 per hour \ 50 Asic \ price $5 each.</Text>
                     <Text>- Acquiring NFT Farm and staking, mining speed # 2.42 per hour \ price $15 each.</Text>
+                    <Divider mb={5} />
+                    <Text>
+                        <span style={{ color: 'red' }}>*</span>
+                        Token claiming principle: Tokens are claimed on a first-come, first-served basis. It's important to note that if the pool is empty, you won't be able to claim your tokens.
+                    </Text>
+
                 </Box>
             </Box>
         </Container>

@@ -18,16 +18,16 @@ const Footer: React.FC = () => {
             <div>
                 {/* Ссылки на социальные сети */}
                 <Flex justifyContent="center" alignItems="center">
-                    <Link href={"https://twitter.com/ChainsInsider"} mx={2}>
+                    <Link href={"https://twitter.com/LookHookInfo"} mx={2}>
                         <FaTwitter size={24} color="#ffffff" />
                     </Link>
-                    <Link href={"https://discord.gg"} mx={2}>
+                    <Link href={"https://discord.gg/U8fSgmjWDB"} mx={2}>
                         <FaDiscord size={24} color="#ffffff" />
                     </Link>
-                    <Link href={"https://t.me/ChainInsider"} mx={2}>
+                    <Link href={"https://t.me/ChainInside/491"} mx={2}>
                         <FaTelegram size={24} color="#ffffff" />
                     </Link>
-                    <Link href={"https://github.com/ваш_аккаунт"} mx={2}>
+                    <Link href={"https://github.com/LookHookInfo"} mx={2}>
                         <FaGithub size={24} color="#ffffff" />
                     </Link>
                 </Flex>
