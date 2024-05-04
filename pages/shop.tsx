@@ -19,7 +19,7 @@ export default function Shop() {
                         </Link>
                     </Flex>
                     <Heading mt={"40px"}>Shop</Heading>
-                    <Text>Purchase tools with $Electron (ELT) to increase your earnings.</Text>
+                    <Text>Purchase tools with $Tether (USDT) to increase your earnings.</Text>
                     {isLoading ? (
                         <Flex h={"50vh"} justifyContent={"center"} alignItems={"center"}>
                             <Spinner />

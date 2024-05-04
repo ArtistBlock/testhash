@@ -22,7 +22,7 @@ export function ClaimFarmer() {
     return (
         <Container maxW="1200px">
             <Flex direction="column" alignItems="center" justifyContent="center" h="50vh">
-                <Heading mb={4}>Claim Farmer to start mining</Heading>
+                <Heading mb={4}>Open a mining center</Heading>
                 <Box borderRadius="8px" overflow="hidden" my={10}>
                     {metadata?.image && (
                         <MediaRenderer
@@ -38,7 +38,7 @@ export function ClaimFarmer() {
                     action={(contract) => contract.erc1155.claim(0, 1)}
                     style={{ width: '100%', maxWidth: '300px' }}
                 >
-                    Claim Farmer
+                    Claim
                 </Web3Button>
             </Flex>
         </Container>

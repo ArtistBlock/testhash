@@ -56,7 +56,7 @@ const Home: NextPage = () => {
       <Container maxW="100%" py={8}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
           <Card p={5}>
-            <Heading>Miner:</Heading>
+            <Heading>Mining center:</Heading>
             <SimpleGrid columns={2} spacing={10}>
               <Box>
                 {ownedFarmers?.map((nft) => (
@@ -70,7 +70,7 @@ const Home: NextPage = () => {
                 ))}
               </Box>
               <Box>
-                <Text fontSize="small" fontWeight="bold">$ELT Balance:</Text>
+                <Text fontSize="small" fontWeight="bold">$HASH Balance:</Text>
                 {rewardBalance && (
                   <p>{(Math.round(parseFloat(ethers.utils.formatUnits(rewardBalance, 18)) * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 )}

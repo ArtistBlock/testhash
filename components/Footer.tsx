@@ -13,7 +13,17 @@ const Footer: React.FC = () => {
             color: "#ffffff",
         }}>
             <div>
-                <p>@LookHook DEV </p>
+                <p>
+                    Developer
+                    <Link
+                        href="https://lookhook.info/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#ffffff", textDecoration: "underline", marginLeft: "0.2rem" }}
+                    >
+                        LookHook DEV
+                    </Link>
+                </p>
             </div>
             <div>
                 <Flex justifyContent="center" alignItems="center">
@@ -23,7 +33,7 @@ const Footer: React.FC = () => {
                     <Link href={"https://discord.gg/U8fSgmjWDB"} mx={2} target="_blank" rel="noopener noreferrer">
                         <FaDiscord size={24} color="#ffffff" />
                     </Link>
-                    <Link href={"https://t.me/ChainInside/491"} mx={2} target="_blank" rel="noopener noreferrer">
+                    <Link href={"https://t.me/Look_Hook"} mx={2} target="_blank" rel="noopener noreferrer">
                         <FaTelegram size={24} color="#ffffff" />
                     </Link>
                     <Link href={"https://github.com/LookHookInfo"} mx={2} target="_blank" rel="noopener noreferrer">
