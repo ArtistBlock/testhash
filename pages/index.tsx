@@ -6,6 +6,7 @@ import { Inventory } from "../components/Inventory";
 import { Equipped } from "../components/Equipped";
 import { BigNumber, ethers } from "ethers";
 import { Text, Box, Card, Container, Flex, Heading, SimpleGrid, Spinner, Skeleton } from "@chakra-ui/react";
+import { maxHeaderSize } from "http";
 
 const Home: NextPage = () => {
   const address = useAddress();
@@ -86,7 +87,7 @@ const Home: NextPage = () => {
             </Skeleton>
           </Card>
         </SimpleGrid>
-        <Card p={5} my={10}>
+        <Card p={5} my={10} maxW="100%">
           <Heading mb={8}>Equiped Device:</Heading>
           <SimpleGrid columns={3} spacing={10}>
             {equippedTools &&
