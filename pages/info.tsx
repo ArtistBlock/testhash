@@ -61,7 +61,7 @@ export default function Info() {
                     <Text>- The remaining 5% is used to strengthen the ecosystem through liquidity provision, support for external developers, and integration of new solutions for our users.</Text>
                     <Divider mb={5} />
                     <Text mb={4}><b>Participants acquire and stake NFTs to receive #hash tokens as rewards, with mining speed depending on the quantity and characteristics of NFTs. The project provides for 4 types of NFTs:</b></Text>
-                    <Text mb={2}>- NFT Place / 0$ / explorer</Text>
+                    <Text mb={2}>- NFT Hub / 0$ / explorer</Text>
                     <Text mb={2}>- NFT GPU / $1.99 / explorer</Text>
                     <Text mb={2}>- NFT Asic / $9.50 / explorer</Text>
                     <Text mb={2}>- NFT Farm / $29.20 / explorer</Text>
